@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Sundari — Bienestar que comienza cuando decides detenerte</title>
+<meta name="description" content="Casa Sundari. Un espacio dedicado a tu bienestar, donde cada tratamiento está diseñado para ayudarte a desconectar, renovar tu energía y volver a sentirte tú.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motion@11/dist/motion.global.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#2E1A3D;
+    --ink-soft:#5C4770;
+    --plum:#5B3572;
+    --plum-deep:#3A2049;
+    --orchid:#8E5FA6;
+    --lilac:#C6A4D6;
+    --lilac-soft:#E7D8ED;
+    --bg:#FBF8FC;
+    --bg-alt:#F2E9F6;
+    --cream:#FFFDFB;
+    --line:rgba(46,26,61,0.12);
+    --gold-star:#C9A15F;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--lilac); color:var(--plum-deep);}
+
+  .font-display{font-family:'Cormorant Garamond',serif;}
+  .tracking-logo{letter-spacing:0.42em;}
+  .tracking-wide-2{letter-spacing:0.28em;}
+  .tracking-wide-3{letter-spacing:0.16em;}
+
+  .text-ink{color:var(--ink);}
+  .text-ink-soft{color:var(--ink-soft);}
+  .text-plum{color:var(--plum);}
+  .text-plum-deep{color:var(--plum-deep);}
+  .text-orchid{color:var(--orchid);}
+  .text-cream{color:var(--cream);}
+  .text-cream-95{color:rgba(255,253,251,0.95);}
+  .text-cream-80{color:rgba(255,253,251,0.80);}
+  .text-cream-78{color:rgba(255,253,251,0.78);}
+  .text-cream-75{color:rgba(255,253,251,0.75);}
+  .text-cream-70{color:rgba(255,253,251,0.70);}
+  .text-cream-60{color:rgba(255,253,251,0.60);}
+  .bg-cream-40{background:rgba(255,253,251,0.40);}
+  .bg-plum-deep-10{background:rgba(58,32,73,0.10);}
+  .bg-plum{background:var(--plum);}
+  .bg-plum-deep{background:var(--plum-deep);}
+  .bg-bg-alt{background:var(--bg-alt);}
+  .bg-cream{background:var(--cream);}
+  .border-line{border-color:var(--line);}
+
+  .fade-el{opacity:0; transform:translateY(28px);}
+  .no-js .fade-el{opacity:1; transform:none;}
+
+  /* ---------- NAV ---------- */
+  .nav-pill{
+    background:rgba(255,253,251,0.78);
+    backdrop-filter:blur(18px) saturate(160%);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    border:1px solid var(--line);
+    box-shadow:0 12px 40px rgba(58,32,73,0.10);
+  }
+  .nav-link{ position:relative; color:var(--ink-soft); font-size:0.82rem; letter-spacing:0.06em; }
+  .nav-link::after{
+    content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px;
+    background:var(--plum); transition:width .5s cubic-bezier(0.32,0.72,0,1);
+  }
+  .nav-link:hover::after{ width:100%; }
+
+  /* ---------- BUTTONS ---------- */
+  .btn-primary{
+    display:inline-flex; align-items:center; gap:0.75rem;
+    background:var(--plum-deep); color:var(--cream); border-radius:999px;
+    padding:0.9rem 0.6rem 0.9rem 1.6rem; font-size:0.85rem; letter-spacing:0.04em;
+    transition:transform .5s cubic-bezier(0.32,0.72,0,1), box-shadow .5s cubic-bezier(0.32,0.72,0,1);
+    box-shadow:0 14px 34px rgba(58,32,73,0.28); will-change:transform; border:none; cursor:pointer;
+  }
+  .btn-primary:hover{ box-shadow:0 18px 46px rgba(58,32,73,0.38); }
+  .btn-primary:active{ transform:scale(0.97); }
+  .btn-icon-wrap{
+    width:2.35rem; height:2.35rem; border-radius:999px; background:rgba(255,255,255,0.14);
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .5s cubic-bezier(0.32,0.72,0,1);
+  }
+  .btn-primary:hover .btn-icon-wrap{ transform:translate(2px,-1px) scale(1.06); }
+
+  .btn-secondary{
+    display:inline-flex; align-items:center; gap:0.6rem;
+    background:transparent; color:var(--cream); border:1px solid rgba(255,253,251,0.55);
+    border-radius:999px; padding:0.85rem 1.5rem; font-size:0.85rem; letter-spacing:0.04em;
+    transition:background .4s ease, border-color .4s ease;
+  }
+  .btn-secondary:hover{ background:rgba(255,253,251,0.12); border-color:rgba(255,253,251,0.9); }
+
+  .btn-card{
+    display:inline-flex; align-items:center; gap:0.5rem;
+    color:var(--plum-deep); font-size:0.82rem; letter-spacing:0.03em;
+    border-bottom:1px solid var(--plum-deep); padding-bottom:0.2rem;
+    transition:opacity .35s ease, gap .35s ease; background:none; border-top:none; border-left:none; border-right:none; cursor:pointer;
+  }
+  .btn-card:hover{ opacity:0.6; gap:0.8rem; }
+
+  .btn-ghost{
+    display:inline-flex; align-items:center; gap:0.6rem; color:var(--ink);
+    border-bottom:1px solid var(--ink); padding-bottom:0.25rem; font-size:0.85rem; letter-spacing:0.04em;
+    transition:opacity .4s ease, gap .4s ease;
+  }
+  .btn-ghost:hover{ opacity:0.62; gap:0.9rem; }
+
+  /* ---------- HAMBURGER ---------- */
+  .hamburger{
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:5px; width:2.6rem; height:2.6rem; border-radius:999px;
+    background:var(--bg-alt); border:none; cursor:pointer; flex-shrink:0;
+    transition:background .3s ease;
+  }
+  .hamburger:hover{ background:var(--lilac-soft); }
+  .hamburger-line{
+    display:block; width:1.15rem; height:1.5px; background:var(--ink);
+    border-radius:2px; transition:transform .4s cubic-bezier(0.32,0.72,0,1), opacity .3s ease, width .3s ease;
+  }
+  .hamburger.open .hamburger-line:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+  .hamburger.open .hamburger-line:nth-child(2){ opacity:0; }
+  .hamburger.open .hamburger-line:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+
+  /* ---------- HERO ---------- */
+  .hero-media{
+    background-image:
+      linear-gradient(180deg, rgba(46,26,61,0.32) 0%, rgba(46,26,61,0.55) 60%, rgba(46,26,61,0.88) 100%),
+      url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1800&auto=format&fit=crop&q=80');
+    background-size:cover; background-position:center; background-color:var(--plum-deep);
+  }
+
+  .rule-dot::before{
+    content:''; display:inline-block; width:5px; height:5px; border-radius:999px;
+    background:var(--orchid); margin-right:0.6rem; vertical-align:middle;
+  }
+
+  /* ---------- PILLAR CARDS (Experiencia) ---------- */
+  .pillar-card{ text-align:center; padding:0 1rem; }
+  .pillar-icon{
+    width:3.6rem; height:3.6rem; border-radius:999px; background:var(--bg-alt); color:var(--plum);
+    display:flex; align-items:center; justify-content:center; margin:0 auto 1.4rem;
+  }
+
+  /* ---------- NECESIDADES CARDS ---------- */
+  .need-card{
+    background:var(--cream); border:1px solid var(--line); border-radius:1.5rem;
+    padding:2rem 1.6rem; text-align:left; cursor:pointer;
+    transition:transform .55s cubic-bezier(0.32,0.72,0,1), box-shadow .55s cubic-bezier(0.32,0.72,0,1), border-color .4s ease;
+    display:block; text-decoration:none;
+  }
+  .need-card:hover{ transform:translateY(-6px); box-shadow:0 26px 56px rgba(58,32,73,0.14); border-color:var(--lilac); }
+  .need-icon{
+    width:2.7rem; height:2.7rem; border-radius:999px; background:var(--bg-alt); color:var(--plum);
+    display:flex; align-items:center; justify-content:center; margin-bottom:1.2rem;
+  }
+
+  /* ---------- TABS (Servicios catálogo) ---------- */
+  .tab-btn{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.25rem;
+    color:var(--ink-soft);
+    padding:0.65rem 0;
+    border-bottom:1px solid transparent;
+    background:none; border-top:none; border-left:none; border-right:none; cursor:pointer;
+    transition:color .4s ease, border-color .4s ease;
+    letter-spacing:0.02em;
+  }
+  .tab-btn.active{ color:var(--plum-deep); border-color:var(--plum-deep); }
+  .tab-dot{
+    width:6px; height:6px; border-radius:999px; background:var(--line);
+    transition:background .35s ease, transform .35s ease;
+  }
+  .tab-dot.active{ background:var(--plum-deep); transform:scale(1.3); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  /* ---------- TREATMENT CARDS (Masajes / Faciales / Cuerpo) ---------- */
+  .treat-card{
+    background:var(--cream); border:1px solid var(--line); border-radius:1.5rem;
+    padding:2rem 1.8rem; display:flex; flex-direction:column; height:100%;
+    transition:transform .5s cubic-bezier(0.32,0.72,0,1), box-shadow .5s cubic-bezier(0.32,0.72,0,1);
+  }
+  .treat-card:hover{ transform:translateY(-5px); box-shadow:0 24px 54px rgba(58,32,73,0.12); }
+  .treat-price-row{
+    display:flex; justify-content:space-between; align-items:center;
+    border-top:1px solid var(--line); margin-top:1.4rem; padding-top:1.1rem;
+  }
+  .treat-price{ font-family:'Cormorant Garamond',serif; font-size:1.05rem; color:var(--plum-deep); }
+  .treat-duration{ font-size:0.68rem; letter-spacing:0.05em; color:var(--ink-soft); text-transform:uppercase; }
+
+  /* ---------- BEFORE / AFTER ---------- */
+  .ba-card{ border-radius:1.5rem; overflow:hidden; background:var(--cream); border:1px solid var(--line); }
+  .ba-images{ display:grid; grid-template-columns:1fr 1fr; }
+  .ba-img{ aspect-ratio:3/4; background-size:cover; background-position:center; position:relative; }
+  .ba-tag{
+    position:absolute; top:0.75rem; left:0.75rem; background:rgba(46,26,61,0.72); color:#fff;
+    font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; padding:0.3rem 0.7rem; border-radius:999px;
+  }
+
+  /* ---------- TESTIMONIOS ---------- */
+  .testi-card{
+    background:var(--cream); border:1px solid var(--line); border-radius:1.5rem; padding:2.2rem 1.9rem;
+  }
+  .stars{ color:var(--gold-star); letter-spacing:0.15em; font-size:0.9rem; }
+  .avatar-circle{
+    width:2.6rem; height:2.6rem; border-radius:999px; background:var(--bg-alt); color:var(--plum-deep);
+    display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:1.1rem;
+  }
+
+  /* ---------- FORM (Reserva) ---------- */
+  .form-shell{
+    background:var(--cream); border:1px solid var(--line); border-radius:2rem;
+    padding:2.6rem 1.8rem; box-shadow:0 30px 80px rgba(58,32,73,0.10);
+  }
+  @media (min-width:640px){ .form-shell{ padding:3.2rem 3rem; } }
+  .form-group label{
+    display:block; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--ink-soft); margin-bottom:0.55rem;
+  }
+  .form-input, .form-select{
+    width:100%; background:var(--bg-alt); border:1px solid transparent; border-radius:0.9rem;
+    padding:0.85rem 1rem; font-family:'Jost',sans-serif; font-size:0.92rem; color:var(--ink);
+    transition:border-color .3s ease, background .3s ease; appearance:none;
+  }
+  .form-input:focus, .form-select:focus{
+    outline:none; border-color:var(--orchid); background:var(--cream);
+  }
+  .form-section-label{
+    font-family:'Cormorant Garamond',serif; font-size:1.25rem; color:var(--plum-deep);
+    margin-bottom:1.3rem; padding-bottom:0.8rem; border-bottom:1px solid var(--line);
+  }
+  .select-wrap{ position:relative; }
+  .select-wrap::after{
+    content:''; position:absolute; right:1rem; top:50%; width:8px; height:8px;
+    border-right:1.4px solid var(--ink-soft); border-bottom:1.4px solid var(--ink-soft);
+    transform:translateY(-65%) rotate(45deg); pointer-events:none;
+  }
+  .checkbox-row{ display:flex; align-items:flex-start; gap:0.7rem; }
+  .checkbox-row input{ margin-top:0.25rem; width:1rem; height:1rem; accent-color:var(--plum-deep); }
+
+  /* ---------- FAQ ACCORDION ---------- */
+  .faq{ background: var(--lilac-soft);}
+  .faq-item{ border-bottom:1px solid var(--line); }
+  .faq-q{
+    width:100%; display:flex; justify-content:space-between; align-items:center; gap:1rem;
+    padding:1.5rem 0; text-align:left; background:none; border:none; cursor:pointer;
+    font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--ink);
+  }
+  .faq-plus{
+    flex-shrink:0; width:1.6rem; height:1.6rem; position:relative;
+  }
+  .faq-plus::before, .faq-plus::after{
+    content:''; position:absolute; background:var(--plum-deep); transition:transform .4s cubic-bezier(0.32,0.72,0,1);
+  }
+  .faq-plus::before{ top:50%; left:0; width:100%; height:1.4px; transform:translateY(-50%); }
+  .faq-plus::after{ left:50%; top:0; height:100%; width:1.4px; transform:translateX(-50%); }
+  .faq-item.open .faq-plus::after{ transform:translateX(-50%) rotate(90deg); opacity:0; }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .5s cubic-bezier(0.32,0.72,0,1); }
+  .faq-item.open .faq-a{ max-height:220px; }
+  .faq-a p{ padding-bottom:1.5rem; color:var(--ink-soft); line-height:1.7; max-width:38rem; }
+
+  /* ---------- GALLERY FRAME (reuse) ---------- */
+  .gallery-frame{ background-size:cover; background-position:center; background-color:var(--bg-alt); }
+
+  /* ---------- FOOTER ---------- */
+  .footer-dark{ background:var(--plum-deep); color:rgba(255,253,251,0.82); }
+  .footer-link{ color:rgba(255,253,251,0.72); transition:color .3s ease; }
+  .footer-link:hover{ color:#fff; }
+
+  /* ---------- WHATSAPP FAB ---------- */
+  .wa-fab{
+    position:fixed; right:1.4rem; bottom:1.4rem; z-index:60; width:3.7rem; height:3.7rem; border-radius:999px;
+    background:#25D366; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 16px 36px rgba(37,211,102,0.45); transition:transform .35s cubic-bezier(0.32,0.72,0,1);
+  }
+  .wa-fab:hover{ transform:scale(1.08); }
+  .wa-fab::before{
+    content:''; position:absolute; inset:0; border-radius:999px; background:#25D366;
+    animation:wa-pulse 2.2s cubic-bezier(0.4,0,0.4,1) infinite;
+    z-index:-1;
+  }
+  @keyframes wa-pulse{
+    0%{ transform:scale(1); opacity:0.55; }
+    70%{ transform:scale(1.9); opacity:0; }
+    100%{ transform:scale(1.9); opacity:0; }
+  }
+  @media (prefers-reduced-motion: reduce){ .wa-fab::before{ animation:none; } }
+
+  @media (prefers-reduced-motion: reduce){ .fade-el{ opacity:1 !important; transform:none !important; } }
+
+  ::-webkit-scrollbar{ width:10px; }
+  ::-webkit-scrollbar-track{ background:var(--bg); }
+  ::-webkit-scrollbar-thumb{ background:var(--lilac); border-radius:999px; }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-center px-4 pt-4">
+  <nav class="nav-pill rounded-full w-full max-w-5xl flex items-center justify-between pl-6 pr-2.5 py-2.5">
+    <a href="#inicio" class="flex items-center gap-2">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="text-plum">
+        <path d="M12 2C10.5 5 8 6 8 9C8 11 9.7 12.3 12 12.3C14.3 12.3 16 11 16 9C16 6 13.5 5 12 2Z" stroke="currentColor" stroke-width="1.1"/>
+        <path d="M12 12.3V17" stroke="currentColor" stroke-width="1.1"/>
+        <path d="M4 16C6 14 9 14.5 12 17C15 14.5 18 14 20 16" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+        <path d="M6 19C8.2 17.3 10 17.6 12 19.3C14 17.6 15.8 17.3 18 19" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity="0.55"/>
+      </svg>
+      <span class="font-display tracking-logo text-sm text-ink">SUNDARI</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#inicio" class="nav-link">Inicio</a>
+      <a href="#necesidades" class="nav-link">Necesidad</a>
+      <a href="#servicios" class="nav-link">Servicios</a>
+      <a href="#resultados" class="nav-link">Resultados</a>
+      <a href="#faq" class="nav-link">Preguntas</a>
+    </div>
+    <a href="#reserva" class="hidden md:inline-flex btn-primary text-xs !py-2 !pl-4">
+      Reservar
+      <span class="btn-icon-wrap !w-8 !h-8">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </a>
+    <button id="menuToggle" class="hamburger md:hidden" aria-label="Abrir menú" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </nav>
+</header>
+
+<!-- Mobile menu -->
+<div id="mobileMenu" class="fixed inset-0 z-40 bg-cream translate-y-[-100%] transition-transform duration-500" style="transition-timing-function:cubic-bezier(0.32,0.72,0,1);">
+  <div class="h-full flex flex-col items-center justify-center gap-7 font-display text-3xl text-ink px-6">
+    <a href="#inicio" class="mobile-link">Inicio</a>
+    <a href="#necesidades" class="mobile-link">Necesidad</a>
+    <a href="#servicios" class="mobile-link">Servicios</a>
+    <a href="#resultados" class="mobile-link">Resultados</a>
+    <a href="#faq" class="mobile-link">Preguntas</a>
+    <a href="#reserva" class="mobile-link btn-primary text-base mt-4" style="font-family:'Jost',sans-serif;">
+      Reservar mi experiencia
+      <span class="btn-icon-wrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </a>
+  </div>
+</div>
+
+<!-- ============ 1. HERO ============ -->
+<section id="inicio" class="relative min-h-[100dvh] flex items-end hero-media">
+  <div class="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-10 pb-20 sm:pb-24 pt-40">
+    <h1 class="fade-el font-display text-cream text-[2.5rem] leading-[1.06] sm:text-5xl md:text-6xl font-light">
+      Casa Sundari
+    </h1>
+    <p class="fade-el font-display italic text-cream-95 text-2xl sm:text-3xl md:text-4xl mt-4 max-w-2xl leading-snug font-light">
+      El bienestar que tu cuerpo ha estado esperando.
+    </p>
+    <p class="fade-el text-cream-78 max-w-md mt-7 text-[0.98rem] leading-relaxed">
+      Un espacio dedicado a tu bienestar, donde cada tratamiento está diseñado para ayudarte a desconectar, renovar tu energía y volver a sentirte tú.
+    </p>
+    <div class="fade-el flex flex-wrap items-center gap-4 mt-10">
+      <a href="#reserva" class="btn-primary">
+        Reservar mi experiencia
+        <span class="btn-icon-wrap">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+      <a href="#servicios" class="btn-secondary">Explorar servicios</a>
+    </div>
+  </div>
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-2 text-cream-70">
+    <span class="text-[0.6rem] tracking-wide-2 uppercase">Descubre</span>
+    <div class="w-px h-9 bg-cream-40"></div>
+  </div>
+</section>
+
+<!-- ============ 2. EXPERIENCIA CASA SUNDARI ============ -->
+<section id="experiencia" class="py-28 md:py-36 px-6 sm:px-10">
+  <div class="max-w-5xl mx-auto grid md:grid-cols-12 gap-10 md:gap-14 items-start">
+    <div class="md:col-span-5 fade-el">
+      <h2 class="font-display text-3xl sm:text-4xl mt-5 leading-tight text-ink">
+        Más que un tratamiento.<br>Un momento para ti.
+      </h2>
+      <p class="text-ink-soft leading-loose mt-6 text-[1.02rem]">
+        En Casa Sundari creemos que el bienestar no es un lujo, sino una forma de reconectar contigo. Creamos experiencias que combinan cuidado, relajación y armonía en un ambiente pensado para que puedas desconectar del ritmo cotidiano.
+      </p>
+      <p class="font-display text-2xl text-plum-deep mt-8">Bienestar · Belleza · Equilibrio</p>
+    </div>
+    <div class="md:col-span-7 fade-el gallery-frame rounded-[1.75rem] min-h-[340px] md:min-h-[420px]" style="background-image:url('https://images.unsplash.com/photo-1552693673-1bf958298935?w=1300&auto=format&fit=crop&q=80');"></div>
+  </div>
+
+  <div class="max-w-5xl mx-auto grid sm:grid-cols-3 gap-10 mt-20 pt-16 border-t border-line">
+    <div class="pillar-card fade-el">
+      <div class="pillar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2C7 3 4 6 4 10C4 15 8 20 12 22C16 20 20 15 20 10C20 6 17 3 12 2Z" stroke="currentColor" stroke-width="1.1"/></svg></div>
+      <p class="font-display text-xl text-ink">Relajación</p>
+      <p class="text-ink-soft text-sm mt-2 leading-relaxed">Momentos para liberar tensión y descansar.</p>
+    </div>
+    <div class="pillar-card fade-el">
+      <div class="pillar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C13 6 16 6.5 16 10C16 12.5 14.2 15 12 15C9.8 15 8 12.5 8 10C8 6.5 11 6 12 3Z" stroke="currentColor" stroke-width="1.2"/></svg></div>
+      <p class="font-display text-xl text-ink">Cuidado</p>
+      <p class="text-ink-soft text-sm mt-2 leading-relaxed">Tratamientos diseñados para cuidar cuerpo y piel.</p>
+    </div>
+    <div class="pillar-card fade-el">
+      <div class="pillar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.1"/><path d="M12 3.5V6M12 18V20.5M3.5 12H6M18 12H20.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+      <p class="font-display text-xl text-ink">Equilibrio</p>
+      <p class="text-ink-soft text-sm mt-2 leading-relaxed">Una experiencia que busca renovar cuerpo y mente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. ¿QUÉ NECESITA TU CUERPO HOY? ============ -->
+<section id="necesidades" class="py-28 md:py-36 px-6 sm:px-10 bg-bg-alt">
+  <div class="max-w-3xl mx-auto text-center fade-el">
+    <p class="rule-dot text-xs tracking-wide-2 uppercase text-orchid justify-center inline-flex items-center">Empieza por ti</p>
+    <h2 class="font-display text-4xl sm:text-5xl mt-5 text-ink">¿Qué necesitas hoy?</h2>
+    <p class="text-ink-soft mt-4 max-w-md mx-auto">No hace falta saber el nombre del tratamiento. Solo cómo te sientes.</p>
+  </div>
+
+  <div class="max-w-6xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-5 mt-14">
+    <a href="#servicios" data-open-tab="masajes" class="need-card fade-el">
+      <div class="need-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 21C12 21 4 15.5 4 9.5C4 6.5 6.2 4.5 8.7 4.5C10.1 4.5 11.3 5.2 12 6.3C12.7 5.2 13.9 4.5 15.3 4.5C17.8 4.5 20 6.5 20 9.5C20 15.5 12 21 12 21Z" stroke="currentColor" stroke-width="1.1"/></svg></div>
+      <p class="text-ink-soft text-xs tracking-wide-2 uppercase mb-1">Necesito relajarme</p>
+      <p class="font-display text-2xl text-plum-deep">Masaje relajante</p>
+    </a>
+    <a href="#servicios" data-open-tab="masajes" class="need-card fade-el">
+      <div class="need-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="2.4" stroke="currentColor" stroke-width="1.2"/><path d="M8 21V14C8 12.3 9.3 11 11 11H13C14.7 11 16 12.3 16 14V21" stroke="currentColor" stroke-width="1.2"/></svg></div>
+      <p class="text-ink-soft text-xs tracking-wide-2 uppercase mb-1">Tengo tensión muscular</p>
+      <p class="font-display text-2xl text-plum-deep">Masaje descontracturante</p>
+    </a>
+    <a href="#servicios" data-open-tab="faciales" class="need-card fade-el">
+      <div class="need-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.2"/><path d="M9 10.5H9.01M15 10.5H15.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 15C10 16 14 16 15 15" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+      <p class="text-ink-soft text-xs tracking-wide-2 uppercase mb-1">Quiero cuidar mi piel</p>
+      <p class="font-display text-2xl text-plum-deep">Tratamientos faciales</p>
+    </a>
+    <a href="#servicios" data-open-tab="masajes" class="need-card fade-el">
+      <div class="need-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2L14 9H21L15.5 13.5L17.5 21L12 16.5L6.5 21L8.5 13.5L3 9H10L12 2Z" stroke="currentColor" stroke-width="1"/></svg></div>
+      <p class="text-ink-soft text-xs tracking-wide-2 uppercase mb-1">Necesito recuperar energía</p>
+      <p class="font-display text-2xl text-plum-deep">Masaje energético</p>
+    </a>
+    <a href="#servicios" data-open-tab="faciales" class="need-card fade-el">
+      <div class="need-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2L20 8V16L12 22L4 16V8L12 2Z" stroke="currentColor" stroke-width="1.2"/></svg></div>
+      <p class="text-ink-soft text-xs tracking-wide-2 uppercase mb-1">Quiero renovar mi piel</p>
+      <p class="font-display text-2xl text-plum-deep">Microdermoabrasión / Hidrafacial</p>
+    </a>
+    <a href="#reserva" class="need-card fade-el" style="background:var(--plum-deep); border-color:var(--plum-deep);">
+      <div class="need-icon" style="background:rgba(255,255,255,0.12); color:#fff;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <p class="text-cream-70 text-xs tracking-wide-2 uppercase mb-1">No estoy segura</p>
+      <p class="font-display text-2xl text-cream">Cuéntanos y te orientamos</p>
+    </a>
+  </div>
+</section>
+
+<!-- ============ 4. SERVICIOS — CATÁLOGO POR CATEGORÍAS ============ -->
+<section id="servicios" class="py-28 md:py-36 px-6 sm:px-10">
+  <div class="max-w-3xl mx-auto text-center fade-el">
+    <h2 class="font-display text-4xl sm:text-5xl mt-5 text-ink">Encuentra tu momento</h2>
+    <p class="text-ink-soft mt-4 max-w-md mx-auto">Elige una categoría y descubre el tratamiento que mejor se adapta a lo que necesitas hoy.</p>
+  </div>
+
+  <div class="max-w-md mx-auto mt-14 fade-el">
+    <div class="flex justify-center gap-8 sm:gap-12 border-b border-line">
+      <button class="tab-btn active" data-tab="masajes">Masajes</button>
+      <button class="tab-btn" data-tab="faciales">Faciales</button>
+      <button class="tab-btn" data-tab="cuerpo">Cuerpo</button>
+    </div>
+    <div class="flex sm:hidden items-center justify-center gap-3 mt-4">
+      <span class="tab-dot active" data-dot="masajes"></span>
+      <span class="tab-dot" data-dot="faciales"></span>
+      <span class="tab-dot" data-dot="cuerpo"></span>
+    </div>
+    <p class="sm:hidden text-center text-ink-soft text-[0.68rem] tracking-wide-2 uppercase mt-3">← Desliza para cambiar de categoría →</p>
+  </div>
+
+  <div id="tabsContent" class="max-w-6xl mx-auto mt-12">
+    <!-- MASAJES -->
+    <div class="tab-panel active" data-panel="masajes">
+      <p class="text-center text-[0.65rem] tracking-wide-3 uppercase text-ink-soft mb-8">Duración 50 min / 80 min</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Masaje Relajante</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Masaje relajante que libera tensiones, promueve la relajación profunda y el bienestar general.</p>
+          <div class="treat-price-row"><div><p class="treat-price">50 min — $800</p><p class="treat-price">80 min — $1,200</p></div><button class="btn-card wa-service" data-service="Masaje Relajante">Reservar</button></div>
+        </div>
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Descontracturante / Tejido Profundo</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Enfocado en liberar tensión muscular, mejorar movilidad y aliviar contracturas profundas.</p>
+          <div class="treat-price-row"><div><p class="treat-price">50 min — $1,200</p><p class="treat-price">80 min — $1,600</p></div><button class="btn-card wa-service" data-service="Masaje Descontracturante / Tejido Profundo">Reservar</button></div>
+        </div>
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Masaje con Ventosas</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Técnica que ayuda a relajar músculos, mejorar la circulación y favorecer la recuperación muscular.</p>
+          <div class="treat-price-row"><div><p class="treat-price">50 min — $900</p><p class="treat-price">80 min — $1,300</p></div><button class="btn-card wa-service" data-service="Masaje con Ventosas">Reservar</button></div>
+        </div>
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Masaje con Velas</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Experiencia sensorial con aceites tibios que nutren la piel, relajan el cuerpo y la mente.</p>
+          <div class="treat-price-row"><div><p class="treat-price">50 min — $1,000</p><p class="treat-price">80 min — $1,400</p></div><button class="btn-card wa-service" data-service="Masaje con Velas">Reservar</button></div>
+        </div>
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Masaje Energético</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Sesión orientada al equilibrio corporal, liberación de bloqueos y sensación de bienestar integral.</p>
+          <div class="treat-price-row"><div><p class="treat-price">50 min — $800</p><p class="treat-price">80 min — $1,200</p></div><button class="btn-card wa-service" data-service="Masaje Energético">Reservar</button></div>
+        </div>
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Masaje con Piedras Calientes</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Combinación de calor y masaje para una relajación profunda, liberación de tensión y armonía corporal.</p>
+          <div class="treat-price-row"><div><p class="treat-price">50 min — $1,000</p><p class="treat-price">80 min — $1,400</p></div><button class="btn-card wa-service" data-service="Masaje con Piedras Calientes">Reservar</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FACIALES -->
+    <div class="tab-panel" data-panel="faciales">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Limpieza Facial Profunda</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Limpieza profunda para eliminar impurezas y renovar la piel.</p>
+          <div class="treat-price-row"><p class="treat-price">$800</p><button class="btn-card wa-service" data-service="Limpieza Facial Profunda">Reservar</button></div>
+        </div>
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Facial Revitalizante</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Devuelve luminosidad, hidratación y frescura al rostro.</p>
+          <div class="treat-price-row"><p class="treat-price">$700</p><button class="btn-card wa-service" data-service="Facial Revitalizante">Reservar</button></div>
+        </div>
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Microdermoabrasión Punta Diamante</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Exfoliación que mejora textura, suavidad y apariencia de la piel.</p>
+          <div class="treat-price-row"><p class="treat-price">$1,090</p><button class="btn-card wa-service" data-service="Microdermoabrasión Punta Diamante">Reservar</button></div>
+        </div>
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Hidrafacial</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Limpia, hidrata y revitaliza la piel en una sola sesión.</p>
+          <div class="treat-price-row"><p class="treat-price">$990</p><button class="btn-card wa-service" data-service="Hidrafacial">Reservar</button></div>
+        </div>
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Facial Rejuvenecimiento</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Ayuda a mejorar firmeza y dar una apariencia más fresca.</p>
+          <div class="treat-price-row"><p class="treat-price">$990</p><button class="btn-card wa-service" data-service="Facial Rejuvenecimiento">Reservar</button></div>
+        </div>
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Facial Anti Acné</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Ayuda a limpiar poros y mejorar piel con tendencia acnéica.</p>
+          <div class="treat-price-row"><p class="treat-price">$990</p><button class="btn-card wa-service" data-service="Facial Anti Acné">Reservar</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CUERPO -->
+    <div class="tab-panel" data-panel="cuerpo">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Modelado · Reafirmación · Estética Corporal</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Moldeo y reafirmación de glúteo. Mejora apariencia, firmeza y definición.</p>
+          <div class="treat-price-row"><div><p class="treat-price">$900</p><p class="treat-price">$1,300</p></div><button class="btn-card wa-service" data-service="Modelado / Reafirmación / Estética Corporal">Reservar</button></div>
+        </div>
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Reducción de Cintura</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Ayuda a mejorar el contorno corporal y la definición de la zona.</p>
+          <div class="treat-price-row"><div><p class="treat-price">$900</p><p class="treat-price">$1,300</p></div><button class="btn-card wa-service" data-service="Reducción de Cintura">Reservar</button></div>
+        </div>
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Anticelulitis</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Tratamiento enfocado en mejorar textura y apariencia de la piel.</p>
+          <div class="treat-price-row"><div><p class="treat-price">$1,000</p><p class="treat-price">$1,400</p></div><button class="btn-card wa-service" data-service="Anticelulitis">Reservar</button></div>
+        </div>
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Reafirmante (Brazos, Piernas y Glúteo)</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Ayuda a mejorar firmeza y aspecto de la piel.</p>
+          <div class="treat-price-row"><div><p class="treat-price">$1,000</p><p class="treat-price">$1,400</p></div><button class="btn-card wa-service" data-service="Reafirmante Brazos Piernas Glúteo">Reservar</button></div>
+        </div>
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Reducción de Papada</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Tratamiento enfocado en definir y mejorar el contorno facial.</p>
+          <div class="treat-price-row"><p class="treat-price">$800</p><button class="btn-card wa-service" data-service="Reducción de Papada">Reservar</button></div>
+        </div>
+        <div class="treat-card fade-el">
+          <p class="font-display text-xl text-ink">Maderoterapia Reafirmante o Reductiva</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Técnica corporal que favorece el modelado y la firmeza.</p>
+          <div class="treat-price-row"><div><p class="treat-price">$1,000</p><p class="treat-price">$1,400</p></div><button class="btn-card wa-service" data-service="Maderoterapia">Reservar</button></div>
+        </div>
+        <div class="treat-card fade-el sm:col-span-2 lg:col-span-1">
+          <p class="font-display text-xl text-ink">Reafirmante (Radiofrecuencia y Electroestimulación)</p>
+          <p class="text-ink-soft text-sm mt-2 leading-relaxed flex-1">Tecnología enfocada en mejorar firmeza y tonificación corporal.</p>
+          <div class="treat-price-row"><div><p class="treat-price">$1,200</p><p class="treat-price">$1,600</p></div><button class="btn-card wa-service" data-service="Radiofrecuencia y Electroestimulación">Reservar</button></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-center text-ink-soft text-xs mt-14">Precios de referencia en pesos mexicanos. Consulta promociones vigentes por WhatsApp.</p>
+  </div>
+</section>
+
+<!-- ============ 7. TRABAJOS REALIZADOS — ANTES Y DESPUÉS ============ -->
+<section id="resultados" class="py-28 md:py-36 px-6 sm:px-10 bg-bg-alt">
+  <div class="max-w-3xl mx-auto text-center fade-el">
+    <h2 class="font-display text-4xl sm:text-5xl mt-5 text-ink">Antes y después</h2>
+    <p class="text-ink-soft mt-4 max-w-md mx-auto">Resultados reales de cuidado constante y protocolos bien aplicados.</p>
+  </div>
+
+  <div class="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
+    <div class="ba-card fade-el">
+      <div class="ba-images">
+        <div class="ba-img" style="background-image:url('https://images.unsplash.com/photo-1552693673-1bf958298935?w=500&auto=format&fit=crop&q=80&sat=-60');"><span class="ba-tag">Antes</span></div>
+        <div class="ba-img" style="background-image:url('https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=500&auto=format&fit=crop&q=80');"><span class="ba-tag">Después</span></div>
+      </div>
+      <p class="p-5 text-ink-soft text-sm">Facial rejuvenecimiento — 3 sesiones</p>
+    </div>
+    <div class="ba-card fade-el">
+      <div class="ba-images">
+        <div class="ba-img" style="background-image:url('https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=500&auto=format&fit=crop&q=80&sat=-60');"><span class="ba-tag">Antes</span></div>
+        <div class="ba-img" style="background-image:url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=500&auto=format&fit=crop&q=80');"><span class="ba-tag">Después</span></div>
+      </div>
+      <p class="p-5 text-ink-soft text-sm">Maderoterapia reductiva — 6 sesiones</p>
+    </div>
+    <div class="ba-card fade-el sm:col-span-2 lg:col-span-1">
+      <div class="ba-images">
+        <div class="ba-img" style="background-image:url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=500&auto=format&fit=crop&q=80&sat=-60');"><span class="ba-tag">Antes</span></div>
+        <div class="ba-img" style="background-image:url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=500&auto=format&fit=crop&q=80');"><span class="ba-tag">Después</span></div>
+      </div>
+      <p class="p-5 text-ink-soft text-sm">Anticelulitis + reafirmante — 8 sesiones</p>
+    </div>
+  </div>
+  <p class="text-center text-ink-soft text-xs mt-10 max-w-md mx-auto">Resultados representativos. Pueden variar según cada persona y protocolo seguido.</p>
+</section>
+
+<!-- ============ 8. TESTIMONIOS ============ -->
+<section id="testimonios" class="py-28 md:py-36 px-6 sm:px-10">
+  <div class="max-w-3xl mx-auto text-center fade-el">
+    <p class="rule-dot text-xs tracking-wide-2 uppercase text-orchid justify-center inline-flex items-center">Voces reales</p>
+    <h2 class="font-display text-4xl sm:text-5xl mt-5 text-ink">Lo que dicen quienes conocieron Casa Sundari</h2>
+  </div>
+
+  <div class="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
+    <div class="testi-card fade-el">
+      <p class="stars mb-3">★★★★★</p>
+      <p class="text-ink-soft leading-relaxed">"Una experiencia increíble. Desde que entras sientes una tranquilidad completamente diferente."</p>
+      <div class="flex items-center gap-3 mt-6">
+        <div class="avatar-circle">M</div>
+        <div><p class="text-ink text-sm font-medium">Mariana R.</p><p class="text-ink-soft text-xs">Cliente Casa Sundari</p></div>
+      </div>
+    </div>
+    <div class="testi-card fade-el">
+      <p class="stars mb-3">★★★★★</p>
+      <p class="text-ink-soft leading-relaxed">"El hidrafacial se nota desde la primera sesión. Nunca sentí prisa por parte del staff."</p>
+      <div class="flex items-center gap-3 mt-6">
+        <div class="avatar-circle">D</div>
+        <div><p class="text-ink text-sm font-medium">Daniela C.</p><p class="text-ink-soft text-xs">Cliente Casa Sundari</p></div>
+      </div>
+    </div>
+    <div class="testi-card fade-el sm:col-span-2 lg:col-span-1">
+      <p class="stars mb-3">★★★★★</p>
+      <p class="text-ink-soft leading-relaxed">"Llevo tres meses con la maderoterapia y el cambio es visible. Agendar por WhatsApp es rapidísimo."</p>
+      <div class="flex items-center gap-3 mt-6">
+        <div class="avatar-circle">P</div>
+        <div><p class="text-ink text-sm font-medium">Paola G.</p><p class="text-ink-soft text-xs">Cliente Casa Sundari</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11. CTA FINAL ============ -->
+<section class="relative py-32 md:py-44 px-6 sm:px-10 overflow-hidden bg-plum-deep">
+  <div class="absolute inset-0 opacity-[0.10]" style="background-image:radial-gradient(circle at 20% 20%, #C6A4D6 0, transparent 45%), radial-gradient(circle at 80% 80%, #C6A4D6 0, transparent 45%);"></div>
+  <div class="relative max-w-2xl mx-auto text-center fade-el">
+    <h2 class="font-display text-cream text-4xl sm:text-5xl md:text-6xl leading-tight">
+      Regálate un momento para ti.
+    </h2>
+    <p class="text-cream-75 mt-6">Tu bienestar empieza con una decisión.</p>
+    <a href="https://wa.me/5210000000000?text=Hola%2C%20quiero%20reservar%20mi%20experiencia%20en%20Casa%20Sundari" target="_blank" rel="noopener" class="btn-primary mt-10 !bg-cream !text-plum-deep">
+      Reservar mi experiencia
+      <span class="btn-icon-wrap !bg-plum-deep-10">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--plum-deep)"><path d="M7 17L17 7M17 7H8M17 7V16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </a>
+    <p class="font-display text-2xl text-cream mt-14">Casa Sundari</p>
+    <p class="text-cream-60 tracking-wide-2 text-xs uppercase mt-2">Bienestar · Belleza · Equilibrio</p>
+  </div>
+</section>
+
+<!-- ============ 9. RESERVA ============ -->
+<section id="reserva" class="py-28 md:py-36 px-6 sm:px-10 bg-bg-alt">
+  <div class="max-w-2xl mx-auto text-center fade-el mb-14">
+    <p class="rule-dot text-xs tracking-wide-2 uppercase text-orchid justify-center inline-flex items-center">Tu momento comienza aquí</p>
+    <h2 class="font-display text-4xl sm:text-5xl mt-5 text-ink">Reserva tu momento</h2>
+    <p class="text-ink-soft mt-4">Elige tu tratamiento, encuentra el horario que mejor te convenga y déjanos cuidar de ti.</p>
+  </div>
+
+  <form id="bookingForm" class="form-shell max-w-2xl mx-auto fade-el">
+    <p class="form-section-label">Información personal</p>
+    <div class="grid sm:grid-cols-2 gap-5 mb-10">
+      <div class="form-group">
+        <label for="f-nombre">Nombre</label>
+        <input class="form-input" type="text" id="f-nombre" required placeholder="Tu nombre completo">
+      </div>
+      <div class="form-group">
+        <label for="f-telefono">Teléfono</label>
+        <input class="form-input" type="tel" id="f-telefono" required placeholder="10 dígitos">
+      </div>
+      <div class="form-group sm:col-span-2">
+        <label for="f-email">Correo electrónico</label>
+        <input class="form-input" type="email" id="f-email" placeholder="tucorreo@ejemplo.com">
+      </div>
+    </div>
+
+    <p class="form-section-label">Reserva</p>
+    <div class="grid sm:grid-cols-2 gap-5">
+      <div class="form-group select-wrap">
+        <label for="f-categoria">Seleccionar servicio</label>
+        <select class="form-select" id="f-categoria">
+          <option value="Masajes">Masajes</option>
+          <option value="Faciales">Faciales</option>
+          <option value="Cuerpo">Tratamientos corporales</option>
+          <option value="Otros">Otros servicios</option>
+        </select>
+      </div>
+      <div class="form-group select-wrap">
+        <label for="f-tratamiento">Seleccionar tratamiento</label>
+        <select class="form-select" id="f-tratamiento"></select>
+      </div>
+      <div class="form-group select-wrap">
+        <label for="f-duracion">Seleccionar duración</label>
+        <select class="form-select" id="f-duracion">
+          <option value="50 min">50 min</option>
+          <option value="80 min">80 min</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="f-fecha">Seleccionar fecha</label>
+        <input class="form-input" type="date" id="f-fecha">
+      </div>
+      <div class="form-group sm:col-span-2">
+        <label for="f-hora">Seleccionar horario</label>
+        <input class="form-input" type="time" id="f-hora">
+      </div>
+    </div>
+
+    <div class="checkbox-row mt-10">
+      <input type="checkbox" id="f-terminos" required>
+      <label for="f-terminos" class="text-ink-soft text-sm normal-case tracking-normal">He leído y acepto los términos y condiciones.</label>
+    </div>
+
+    <button type="submit" class="btn-primary w-full sm:w-auto justify-center mt-8">
+      Reservar mi experiencia
+      <span class="btn-icon-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </button>
+  </form>
+</section>
+
+<!-- ============ 10. FAQ ============ -->
+<section id="faq" class="py-28 md:py-36 px-6 sm:px-10 faq">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center fade-el mb-14">
+      <p class="rule-dot text-xs tracking-wide-2 uppercase text-orchid justify-center inline-flex items-center">Preguntas frecuentes</p>
+      <h2 class="font-display text-4xl sm:text-5xl mt-5 text-ink">Antes de reservar</h2>
+    </div>
+
+    <div class="fade-el">
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Necesito reservar con anticipación?</span><span class="faq-plus"></span></button>
+        <div class="faq-a"><p>Recomendamos reservar con al menos 24 horas de anticipación para asegurar el horario de tu preferencia.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Cuánto dura cada tratamiento?</span><span class="faq-plus"></span></button>
+        <div class="faq-a"><p>La mayoría de los masajes se ofrecen en 50 u 80 minutos. Los faciales y tratamientos corporales varían según la técnica; lo verás detallado en cada servicio.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Puedo elegir entre diferentes horarios?</span><span class="faq-plus"></span></button>
+        <div class="faq-a"><p>Sí. Trabajamos de lunes a sábado con horarios abiertos durante el día. Indícanos tu preferencia al reservar.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Qué métodos de pago aceptan?</span><span class="faq-plus"></span></button>
+        <div class="faq-a"><p>Aceptamos efectivo y tarjeta. Confírmalo con nosotros por WhatsApp antes de tu cita.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Puedo cancelar o cambiar mi reserva?</span><span class="faq-plus"></span></button>
+        <div class="faq-a"><p>Sí, puedes reprogramar o cancelar escribiéndonos con al menos algunas horas de anticipación.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Qué debo hacer antes de mi tratamiento?</span><span class="faq-plus"></span></button>
+        <div class="faq-a"><p>Llega unos minutos antes, evita comidas pesadas justo previas a tu sesión y cuéntanos si tienes alguna condición de piel o salud relevante.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Puedo reservar varios tratamientos?</span><span class="faq-plus"></span></button>
+        <div class="faq-a"><p>Claro. Escríbenos por WhatsApp y armamos juntos un plan combinando masajes, faciales y tratamientos corporales.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer-dark py-16 px-6 sm:px-10">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-10">
+    <div>
+      <span class="font-display tracking-logo text-sm text-cream">SUNDARI</span>
+      <p class="text-white/55 text-sm mt-4 leading-relaxed">Bienestar, belleza y equilibrio en cada visita.</p>
+    </div>
+    <div>
+      <p class="text-cream text-xs tracking-wide-2 uppercase mb-4">Navegación</p>
+      <ul class="space-y-2 text-sm">       
+        <li><a href="#inicio" class="footer-link">Inicio</a></li>
+        <li><a href="#necesidades" class="footer-link">Necesidad</a></li>
+        <li><a href="#servicios" class="footer-link">Servicios</a></li>
+        <li><a href="#resultados" class="footer-link">Resultados</a></li>
+        <li><a href="#faq" class="footer-link">Preguntas</a></li>
+        <li><a href="#reserva" class="footer-link">Reservar</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-cream text-xs tracking-wide-2 uppercase mb-4">Contacto</p>
+      <ul class="space-y-2 text-sm">
+        <li class="footer-link">Ubicación por confirmar</li>
+        <li class="footer-link">(55) 0000-0000</li>
+        <li class="footer-link">hola@casasundari.mx</li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-cream text-xs tracking-wide-2 uppercase mb-4">Redes</p>
+      <div class="flex gap-4">
+        <a href="#" class="footer-link" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.3"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="#" class="footer-link" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14 9H16V6H14C12.3 6 11 7.3 11 9V11H9V14H11V21H14V14H16L17 11H14V9Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg></a>
+        <a href="https://wa.me/5210000000000" class="footer-link" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.03 2.003c-5.514 0-9.986 4.472-9.987 9.986 0 1.76.464 3.478 1.345 4.994l-1.43 5.22 5.343-1.401c1.461.797 3.108 1.217 4.729 1.217h.004c5.514 0 9.986-4.472 9.987-9.985 0-2.669-1.037-5.176-2.923-7.063-1.887-1.887-4.393-2.968-7.068-2.968zm3.392 12.413c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.663.591 1.221.774 1.394.86.173.087.274.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.01.477 1.183.564c.173.087.289.13.332.202.043.072.043.419-.101.824z"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-6xl mx-auto border-t border-white/10 mt-12 pt-6 text-white/45 text-xs flex flex-col sm:flex-row justify-between gap-2">
+    <p>© 2026 Casa Sundari. Todos los derechos reservados.</p>
+    <p>Diseñado por JD Solutions</p>
+  </div>
+</footer>
+
+<!-- ============ WHATSAPP FAB ============ -->
+<a href="https://wa.me/5210000000000" target="_blank" rel="noopener" class="wa-fab" aria-label="Escríbenos por WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#FFFDFB">
+    <path d="M12.03 2.003c-5.514 0-9.986 4.472-9.987 9.986 0 1.76.464 3.478 1.345 4.994l-1.43 5.22 5.343-1.401c1.461.797 3.108 1.217 4.729 1.217h.004c5.514 0 9.986-4.472 9.987-9.985 0-2.669-1.037-5.176-2.923-7.063-1.887-1.887-4.393-2.968-7.068-2.968zm3.392 12.413c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.663.591 1.221.774 1.394.86.173.087.274.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.01.477 1.183.564c.173.087.289.13.332.202.043.072.043.419-.101.824z"/>
+  </svg>
+</a>
+
+<script>
+(function(){
+  var GSAP_OK = (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined');
+  if (GSAP_OK) { gsap.registerPlugin(ScrollTrigger); }
+
+  var fadeEls = document.querySelectorAll('.fade-el');
+  if (GSAP_OK) {
+    fadeEls.forEach(function(el){
+      gsap.fromTo(el, { opacity:0, y:28 }, {
+        opacity:1, y:0, duration:1, ease:'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 88%' }
+      });
+    });
+    gsap.fromTo('#inicio .fade-el', { opacity:0, y:28 }, { opacity:1, y:0, duration:1.1, ease:'power3.out', stagger:0.12, delay:0.2 });
+  } else {
+    fadeEls.forEach(function(el){ el.style.opacity = 1; el.style.transform = 'none'; });
+  }
+
+  // Tabs (Servicios catálogo)
+  var tabOrder = ['masajes','faciales','cuerpo'];
+  var tabBtns = document.querySelectorAll('.tab-btn');
+  var tabPanels = document.querySelectorAll('.tab-panel');
+  var tabDots = document.querySelectorAll('.tab-dot');
+  function activateTab(target){
+    tabBtns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-tab') === target); });
+    tabDots.forEach(function(d){ d.classList.toggle('active', d.getAttribute('data-dot') === target); });
+    tabPanels.forEach(function(p){
+      var match = p.getAttribute('data-panel') === target;
+      p.classList.toggle('active', match);
+      if (match && GSAP_OK) { gsap.fromTo(p, {opacity:0, y:12}, {opacity:1, y:0, duration:0.5, ease:'power2.out'}); }
+    });
+  }
+  tabBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){ activateTab(btn.getAttribute('data-tab')); });
+  });
+  // Links from "¿Qué necesitas hoy?" that jump to a specific tab
+  document.querySelectorAll('[data-open-tab]').forEach(function(link){
+    link.addEventListener('click', function(){ activateTab(link.getAttribute('data-open-tab')); });
+  });
+
+  // Swipe táctil (móvil): izquierda = siguiente categoría, derecha = categoría anterior
+  var tabsContent = document.getElementById('tabsContent');
+  var touchStartX = 0, touchStartY = 0, touchTracking = false, swipeHandled = false;
+  tabsContent.addEventListener('touchstart', function(e){
+    var t = e.changedTouches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+    touchTracking = true;
+    swipeHandled = false;
+  }, { passive:true });
+  tabsContent.addEventListener('touchmove', function(e){
+    if (!touchTracking || swipeHandled) return;
+    var t = e.changedTouches[0];
+    var dx = t.clientX - touchStartX;
+    var dy = t.clientY - touchStartY;
+    var SWIPE_THRESHOLD = 48;
+    if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy) * 1.3) {
+      swipeHandled = true;
+      var current = document.querySelector('.tab-btn.active').getAttribute('data-tab');
+      var idx = tabOrder.indexOf(current);
+      var nextIdx = dx < 0 ? (idx + 1) % tabOrder.length : (idx - 1 + tabOrder.length) % tabOrder.length;
+      activateTab(tabOrder[nextIdx]);
+      var target = document.querySelector('.tab-btn[data-tab="' + tabOrder[nextIdx] + '"]');
+      if (target && target.scrollIntoView) { target.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' }); }
+    }
+  }, { passive:true });
+  tabsContent.addEventListener('touchend', function(){ touchTracking = false; });
+
+  // Mobile menu
+  var menuToggle = document.getElementById('menuToggle');
+  var mobileMenu = document.getElementById('mobileMenu');
+  var mobileOpen = false;
+  function setMobileMenu(open){
+    mobileOpen = open;
+    mobileMenu.style.transform = open ? 'translateY(0)' : 'translateY(-100%)';
+    menuToggle.classList.toggle('open', open);
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  menuToggle.addEventListener('click', function(){ setMobileMenu(!mobileOpen); });
+  document.querySelectorAll('.mobile-link').forEach(function(a){
+    a.addEventListener('click', function(){ setMobileMenu(false); });
+  });
+
+  // Magnetic primary buttons
+  if (typeof Motion !== 'undefined' && Motion.animate) {
+    document.querySelectorAll('.btn-primary').forEach(function(btn){
+      btn.addEventListener('mousemove', function(e){
+        var r = btn.getBoundingClientRect();
+        var x = (e.clientX - r.left - r.width/2) * 0.18;
+        var y = (e.clientY - r.top - r.height/2) * 0.35;
+        Motion.animate(btn, { transform: 'translate(' + x + 'px,' + y + 'px)' }, { type:'spring', stiffness:220, damping:18 });
+      });
+      btn.addEventListener('mouseleave', function(){
+        Motion.animate(btn, { transform: 'translate(0px,0px)' }, { type:'spring', stiffness:220, damping:16 });
+      });
+    });
+  }
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var btn = item.querySelector('.faq-q');
+    btn.addEventListener('click', function(){
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
+      if (!wasOpen) { item.classList.add('open'); }
+    });
+  });
+
+  // Servicio -> Reservar por WhatsApp (tarjetas individuales)
+  document.querySelectorAll('.wa-service').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var service = btn.getAttribute('data-service');
+      var msg = 'Hola, quiero reservar el servicio: ' + service;
+      window.open('https://wa.me/5210000000000?text=' + encodeURIComponent(msg), '_blank');
+    });
+  });
+
+  // Reserva: catálogo dinámico de tratamientos según categoría
+  var catalog = {
+    Masajes: ['Masaje Relajante','Masaje Descontracturante / Tejido Profundo','Masaje con Ventosas','Masaje con Velas','Masaje Energético','Masaje con Piedras Calientes'],
+    Faciales: ['Limpieza Facial Profunda','Facial Revitalizante','Microdermoabrasión Punta Diamante','Hidrafacial','Facial Rejuvenecimiento','Facial Anti Acné'],
+    Cuerpo: ['Modelado / Reafirmación / Estética Corporal','Reducción de Cintura','Anticelulitis','Reafirmante Brazos Piernas Glúteo','Reducción de Papada','Maderoterapia','Radiofrecuencia y Electroestimulación'],
+    Otros: ['Consulta personalizada']
+  };
+  var catSelect = document.getElementById('f-categoria');
+  var treatSelect = document.getElementById('f-tratamiento');
+  var durationGroup = document.getElementById('f-duracion').closest('.form-group');
+
+  function populateTreatments(){
+    var list = catalog[catSelect.value] || [];
+    treatSelect.innerHTML = '';
+    list.forEach(function(name){
+      var opt = document.createElement('option');
+      opt.value = name; opt.textContent = name;
+      treatSelect.appendChild(opt);
+    });
+    durationGroup.style.display = (catSelect.value === 'Masajes') ? '' : 'none';
+  }
+  catSelect.addEventListener('change', populateTreatments);
+  populateTreatments();
+
+  // Envío del formulario a WhatsApp
+  document.getElementById('bookingForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var nombre = document.getElementById('f-nombre').value;
+    var telefono = document.getElementById('f-telefono').value;
+    var email = document.getElementById('f-email').value;
+    var categoria = catSelect.value;
+    var tratamiento = treatSelect.value;
+    var duracion = document.getElementById('f-duracion').value;
+    var fecha = document.getElementById('f-fecha').value;
+    var hora = document.getElementById('f-hora').value;
+
+    var lines = [
+      'Hola, quiero reservar mi experiencia en Casa Sundari.',
+      'Nombre: ' + nombre,
+      'Teléfono: ' + telefono
+    ];
+    if (email) lines.push('Correo: ' + email);
+    lines.push('Categoría: ' + categoria);
+    lines.push('Tratamiento: ' + tratamiento);
+    if (categoria === 'Masajes') lines.push('Duración: ' + duracion);
+    if (fecha) lines.push('Fecha deseada: ' + fecha);
+    if (hora) lines.push('Horario deseado: ' + hora);
+
+    var msg = lines.join('\n');
+    window.open('https://wa.me/5210000000000?text=' + encodeURIComponent(msg), '_blank');
+  });
+})();
+</script>
+
+</body>
+</html>
